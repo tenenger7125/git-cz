@@ -108,7 +108,7 @@ describe('formatCommitMessage()', () => {
       }
     });
 
-    expect(message).equal('feat(init): First commit');
+    expect(message).equal('featinit: First commit');
   });
 
   it('does not include emoji, if emojis disabled in config (custom)', () => {
@@ -120,12 +120,12 @@ describe('formatCommitMessage()', () => {
       },
       config: {
         ...defaultConfig,
-        format: '{subject} :{scope}{type}',
+        format: '{subject} :{scope}-{type}',
         disableEmoji: true
       }
     });
 
-    expect(message).equal('First commit :(init)feat');
+    expect(message).equal('First commit :init-feat');
   });
 
   it('does not include emoji, if emojis disabled in config (dynamic custom)', () => {
@@ -138,11 +138,11 @@ describe('formatCommitMessage()', () => {
       },
       config: {
         ...defaultConfig,
-        format: `{subject} :{scope}{type}${isDynamic && ' [skip ci]'}`,
+        format: `{subject} :{scope}-{type}${isDynamic && ' [skip ci]'}`,
         disableEmoji: true
       }
     });
 
-    expect(message).equal('First commit :(init)feat [skip ci]');
+    expect(message).equal('First commit :init-feat [skip ci]');
   });
 });
